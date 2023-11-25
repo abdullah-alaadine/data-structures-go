@@ -14,3 +14,11 @@ type bucketNode struct {
 	key  string
 	next *bucketNode
 }
+
+func New() *HashTable {
+	ht := &HashTable{}
+	for i := range ht.array {
+		ht.array[i] = &bucket{}
+	}
+	return ht
+}
