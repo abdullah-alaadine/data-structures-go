@@ -15,6 +15,11 @@ func (ht *hashTable) Insert(k string, v any) {
 	ht.array[idx].insert(k, v)
 }
 
+func (ht *hashTable) Get(k string) any {
+	idx := hash(k) % arraySize
+	return ht.array[idx].get(k)
+}
+
 func (ht *hashTable) Delete(k string) {
 	idx := hash(k) % arraySize
 	ht.array[idx].delete(k)
