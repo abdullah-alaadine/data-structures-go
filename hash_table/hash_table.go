@@ -10,14 +10,26 @@ type bucket struct {
 	head *bucketNode
 }
 
-func (b *bucket) insert(k string) {
-	newBucketNode := &bucketNode{key: k, next: b.head}
+func (b *bucket) insert(k string, v any) {
+	newBucketNode := &bucketNode{key: k, value: v, next: b.head}
 	b.head = newBucketNode
 }
 
+func (b *bucket) get(k string) any {
+	currentBucket := b.head
+	for currentBucket != nil {
+		if currentBucket.key == k {
+			return currentBucket.value
+		}
+		currentBucket = currentBucket.next
+	}
+	return nil
+}
+
 type bucketNode struct {
-	key  string
-	next *bucketNode
+	key   string
+	value any
+	next  *bucketNode
 }
 
 func New() *HashTable {
