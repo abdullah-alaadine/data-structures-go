@@ -15,6 +15,20 @@ func (b *bucket) insert(k string, v any) {
 	b.head = newBucketNode
 }
 
+func (b *bucket) put(k string, v any) {
+	if b.head == nil {
+		return
+	}
+	curr := b.head
+	for curr != nil {
+		if curr.key == k {
+			curr.value = v
+			return
+		}
+		curr = curr.next
+	}
+}
+
 func (b *bucket) get(k string) any {
 	currentBucket := b.head
 	for currentBucket != nil {
