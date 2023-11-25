@@ -26,6 +26,24 @@ func (b *bucket) get(k string) any {
 	return nil
 }
 
+func (b *bucket) delete(k string) {
+	if b.head == nil {
+		return
+	}
+	if b.head.key == k {
+		b.head = b.head.next
+		return
+	}
+	currentBucket := b.head
+	for currentBucket.next != nil {
+		if currentBucket.next.key == k {
+			currentBucket.next = currentBucket.next.next
+			return
+		}
+		currentBucket = currentBucket.next
+	}
+}
+
 type bucketNode struct {
 	key   string
 	value any
