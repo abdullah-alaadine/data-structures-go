@@ -1,13 +1,13 @@
 package hashtable
 
-const ArraySize = 7
+const arraySize = 7
 
-type HashTable struct {
-	array [ArraySize]*bucket
+type hashTable struct {
+	array [arraySize]*bucket
 }
 
-func (ht *HashTable) Insert(k string, v any) {
-	idx := hash(k) % ArraySize
+func (ht *hashTable) Insert(k string, v any) {
+	idx := hash(k) % arraySize
 	if v := ht.array[idx].get(k); v != nil {
 		ht.array[idx].put(k, v)
 		return
@@ -15,8 +15,8 @@ func (ht *HashTable) Insert(k string, v any) {
 	ht.array[idx].insert(k, v)
 }
 
-func (ht *HashTable) Delete(k string) {
-	idx := hash(k) % ArraySize
+func (ht *hashTable) Delete(k string) {
+	idx := hash(k) % arraySize
 	ht.array[idx].delete(k)
 }
 
@@ -78,8 +78,8 @@ type bucketNode struct {
 	next  *bucketNode
 }
 
-func New() *HashTable {
-	ht := &HashTable{}
+func New() *hashTable {
+	ht := &hashTable{}
 	for i := range ht.array {
 		ht.array[i] = &bucket{}
 	}
