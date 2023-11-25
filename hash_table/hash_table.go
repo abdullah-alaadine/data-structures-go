@@ -15,6 +15,11 @@ func (ht *HashTable) Insert(k string, v any) {
 	ht.array[idx].insert(k, v)
 }
 
+func (ht *HashTable) Delete(k string) {
+	idx := hash(k) % ArraySize
+	ht.array[idx].delete(k)
+}
+
 type bucket struct {
 	head *bucketNode
 }
