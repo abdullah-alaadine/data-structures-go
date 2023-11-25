@@ -6,6 +6,15 @@ type HashTable struct {
 	array [ArraySize]*bucket
 }
 
+func (ht *HashTable) Insert(k string, v any) {
+	idx := hash(k) % ArraySize
+	if v := ht.array[idx].get(k); v != nil {
+		ht.array[idx].put(k, v)
+		return
+	}
+	ht.array[idx].insert(k, v)
+}
+
 type bucket struct {
 	head *bucketNode
 }
