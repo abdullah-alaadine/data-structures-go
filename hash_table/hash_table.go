@@ -10,6 +10,11 @@ type bucket struct {
 	head *bucketNode
 }
 
+func (b *bucket) insert(k string) {
+	newBucketNode := &bucketNode{key: k, next: b.head}
+	b.head = newBucketNode
+}
+
 type bucketNode struct {
 	key  string
 	next *bucketNode
