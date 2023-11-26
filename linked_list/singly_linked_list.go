@@ -61,6 +61,19 @@ func (l *linkedlist) Append(n int) {
 	l.length++
 }
 
+func (l *linkedlist) PutIn(n, idx int) {
+	if idx >= l.length || idx < 0 {
+		fmt.Fprintln(os.Stderr, "index out of range")
+		return
+	}
+
+	curr := l.head
+	for ; idx > 0; idx-- {
+		curr = curr.next
+	}
+	curr.data = n
+}
+
 func (l *linkedlist) Delete(n int) {
 	if l.head == nil {
 		return
