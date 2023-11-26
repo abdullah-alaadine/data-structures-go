@@ -25,3 +25,7 @@ func (q *Queue) Dequeue() *int {
 func (q *Queue) Length() int {
 	return q.list.Length()
 }
+
+func (q *Queue) PrintQueue() {
+	q.list.PrintList()
+}
