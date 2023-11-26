@@ -17,3 +17,7 @@ func NewQueue() *Queue {
 func (q *Queue) Enqueue(v int) {
 	q.list.Prepend(v)
 }
+
+func (q *Queue) Dequeue() *int {
+	return q.list.Shift()
+}
