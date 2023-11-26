@@ -135,6 +135,25 @@ func (l *Linkedlist) PrintList() {
 	fmt.Println("]")
 }
 
+func (l *Linkedlist) PrintListReversely() {
+	if l.head == nil {
+		return
+	}
+
+	values := []int{}
+	curr := l.head
+
+	for curr != nil {
+		values = append(values, curr.data)
+		curr = curr.next
+	}
+	fmt.Print("[ ")
+	for i := len(values) - 1; i >= 0; i-- {
+		fmt.Printf("%d ", values[i])
+	}
+	fmt.Println("]")
+}
+
 func (l *Linkedlist) Length() int {
 	return l.length
 }
