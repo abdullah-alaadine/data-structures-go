@@ -95,6 +95,26 @@ func (l *linkedlist) Delete(n int) {
 	}
 }
 
+func (l *linkedlist) DeleteAt(idx int) {
+	if idx >= l.length || idx < 0 {
+		fmt.Fprintln(os.Stderr, "index out of range")
+		return
+	}
+
+	if idx == 0 {
+		l.head = l.head.next
+		l.length--
+		return
+	}
+
+	curr := l.head
+	for ; idx > 1; idx-- {
+		curr = curr.next
+	}
+	curr.next = curr.next.next
+	l.length--
+}
+
 func (l *linkedlist) PrintList() {
 	curr := l.head
 	fmt.Print("[ ")
