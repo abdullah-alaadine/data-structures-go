@@ -10,22 +10,22 @@ type node struct {
 	next *node
 }
 
-type linkedlist struct {
+type Linkedlist struct {
 	head   *node
 	length int
 }
 
-func NewLinkedList() *linkedlist {
-	return &linkedlist{}
+func NewLinkedList() *Linkedlist {
+	return &Linkedlist{}
 }
 
-func (l *linkedlist) Prepend(n int) {
+func (l *Linkedlist) Prepend(n int) {
 	newNode := &node{data: n, next: l.head}
 	l.head = newNode
 	l.length++
 }
 
-func (l *linkedlist) Insert(n, idx int) {
+func (l *Linkedlist) Insert(n, idx int) {
 	if idx > l.length || idx < 0 {
 		fmt.Fprintln(os.Stderr, "index out of range")
 		return
@@ -46,7 +46,7 @@ func (l *linkedlist) Insert(n, idx int) {
 	l.length++
 }
 
-func (l *linkedlist) Append(n int) {
+func (l *Linkedlist) Append(n int) {
 	newNode := &node{data: n}
 	if l.head == nil {
 		l.head = newNode
@@ -61,7 +61,7 @@ func (l *linkedlist) Append(n int) {
 	l.length++
 }
 
-func (l *linkedlist) PutIn(n, idx int) {
+func (l *Linkedlist) PutIn(n, idx int) {
 	if idx >= l.length || idx < 0 {
 		fmt.Fprintln(os.Stderr, "index out of range")
 		return
@@ -74,7 +74,7 @@ func (l *linkedlist) PutIn(n, idx int) {
 	curr.data = n
 }
 
-func (l *linkedlist) Delete(n int) {
+func (l *Linkedlist) Delete(n int) {
 	if l.head == nil {
 		return
 	}
@@ -95,7 +95,7 @@ func (l *linkedlist) Delete(n int) {
 	}
 }
 
-func (l *linkedlist) DeleteAt(idx int) {
+func (l *Linkedlist) DeleteAt(idx int) {
 	if idx >= l.length || idx < 0 {
 		fmt.Fprintln(os.Stderr, "index out of range")
 		return
@@ -115,7 +115,7 @@ func (l *linkedlist) DeleteAt(idx int) {
 	l.length--
 }
 
-func (l *linkedlist) PrintList() {
+func (l *Linkedlist) PrintList() {
 	curr := l.head
 	fmt.Print("[ ")
 	for curr != nil {
@@ -125,6 +125,6 @@ func (l *linkedlist) PrintList() {
 	fmt.Println("]")
 }
 
-func (l *linkedlist) Length() int {
+func (l *Linkedlist) Length() int {
 	return l.length
 }
