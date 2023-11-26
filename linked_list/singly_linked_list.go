@@ -104,3 +104,7 @@ func (l *linkedlist) PrintList() {
 	}
 	fmt.Println("]")
 }
+
+func (l *linkedlist) Length() int {
+	return l.length
+}
