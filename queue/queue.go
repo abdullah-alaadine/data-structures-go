@@ -21,3 +21,7 @@ func (q *Queue) Enqueue(v int) {
 func (q *Queue) Dequeue() *int {
 	return q.list.Shift()
 }
+
+func (q *Queue) Length() int {
+	return q.list.Length()
+}
