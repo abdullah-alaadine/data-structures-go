@@ -27,5 +27,5 @@ func (s *Stack) Length() int {
 }
 
 func (s *Stack) PrintStack() {
-	s.list.PrintList()
+	s.list.PrintListReversely()
 }
