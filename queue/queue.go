@@ -13,3 +13,7 @@ func NewQueue() *Queue {
 		list: *linkedlist.NewLinkedList(),
 	}
 }
+
+func (q *Queue) Enqueue(v int) {
+	q.list.Prepend(v)
+}
