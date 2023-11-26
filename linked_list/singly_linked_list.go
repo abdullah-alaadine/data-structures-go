@@ -128,3 +128,10 @@ func (l *Linkedlist) PrintList() {
 func (l *Linkedlist) Length() int {
 	return l.length
 }
+
+func (l *Linkedlist) GetHeadData() *int {
+	if l.head != nil {
+		return &l.head.data
+	}
+	return nil
+}
