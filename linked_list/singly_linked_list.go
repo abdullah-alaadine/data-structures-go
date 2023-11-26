@@ -22,6 +22,25 @@ func (l *linkedlist) Prepend(n int) {
 	l.length++
 }
 
+func (l *linkedlist) Delete(n int) {
+	if l.head == nil {
+		return
+	}
+	if l.head.data == n {
+		l.head = l.head.next
+		return
+	}
+
+	curr := l.head
+	for curr.next != nil {
+		if curr.next.data == n {
+			curr.next = curr.next.next
+			return
+		}
+		curr = curr.next
+	}
+}
+
 func (l *linkedlist) PrintList() {
 	curr := l.head
 	fmt.Print("[ ")
