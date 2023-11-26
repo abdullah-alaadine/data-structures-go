@@ -95,6 +95,16 @@ func (l *Linkedlist) Delete(n int) {
 	}
 }
 
+func (l *Linkedlist) Shift() *int {
+	if l.head == nil {
+		return nil
+	}
+	v := l.head
+	l.head = l.head.next
+	l.length--
+	return &v.data
+}
+
 func (l *Linkedlist) DeleteAt(idx int) {
 	if idx >= l.length || idx < 0 {
 		fmt.Fprintln(os.Stderr, "index out of range")
