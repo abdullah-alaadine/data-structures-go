@@ -12,13 +12,17 @@ type linkedlist struct {
 	length int
 }
 
-func (l *linkedlist) prepend(n int) {
+func NewLinkedList() *linkedlist {
+	return &linkedlist{}
+}
+
+func (l *linkedlist) Prepend(n int) {
 	newNode := &node{data: n, next: l.head}
 	l.head = newNode
 	l.length++
 }
 
-func (l *linkedlist) printList() {
+func (l *linkedlist) PrintList() {
 	curr := l.head
 	fmt.Print("[ ")
 	for curr != nil {
