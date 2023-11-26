@@ -1,6 +1,9 @@
 package linkedlist
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 type node struct {
 	data int
@@ -19,6 +22,27 @@ func NewLinkedList() *linkedlist {
 func (l *linkedlist) Prepend(n int) {
 	newNode := &node{data: n, next: l.head}
 	l.head = newNode
+	l.length++
+}
+
+func (l *linkedlist) Insert(n, idx int) {
+	if idx > l.length || idx < 0 {
+		fmt.Fprintln(os.Stderr, "index out of range")
+		return
+	}
+
+	if l.head == nil {
+		l.head = &node{data: n}
+		l.length++
+		return
+	}
+
+	curr := l.head
+	for ; idx > 1; idx-- {
+		curr = curr.next
+	}
+	newNode := &node{data: n, next: curr.next}
+	curr.next = newNode
 	l.length++
 }
 
