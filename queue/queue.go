@@ -15,3 +15,7 @@ func NewQueue() *Queue {
 func (q *Queue) Insert(n int) {
 	q.list.Append(n)
 }
+
+func (q *Queue) Pop() *int {
+	return q.list.Shift()
+}
