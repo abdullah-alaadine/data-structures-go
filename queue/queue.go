@@ -21,3 +21,7 @@ func (q *Queue) Pop() *int {
 }
 
 func (q *Queue) Len() int { return q.list.Length() }
+
+func (q *Queue) PrintQueue() {
+	q.list.PrintList()
+}
