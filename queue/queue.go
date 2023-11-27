@@ -19,3 +19,5 @@ func (q *Queue) Insert(n int) {
 func (q *Queue) Pop() *int {
 	return q.list.Shift()
 }
+
+func (q *Queue) Len() int { return q.list.Length() }
