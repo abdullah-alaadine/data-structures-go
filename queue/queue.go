@@ -11,3 +11,7 @@ func NewQueue() *Queue {
 		list: *linkedlist.NewLinkedList(),
 	}
 }
+
+func (q *Queue) Insert(n int) {
+	q.list.Append(n)
+}
