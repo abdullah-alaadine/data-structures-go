@@ -1,7 +1,11 @@
 package binarysearchtree
 
-type Node struct {
-	Key   int
-	Left  *Node
-	Right *Node
+type node struct {
+	key   int
+	left  *node
+	right *node
+}
+
+type BinarySearchTree struct {
+	root *node
 }
