@@ -9,3 +9,7 @@ type node struct {
 type BinarySearchTree struct {
 	root *node
 }
+
+func NewBinarySearchTree() *BinarySearchTree {
+	return &BinarySearchTree{}
+}
