@@ -28,7 +28,8 @@ func newNode(value any) *node {
 	}
 }
 
-func (g *Graph) AddNode(n *node) {
+func (g *Graph) AddNode(value any) {
+	n := newNode(value)
 	g.nodes[n.ID] = n
 }
 
