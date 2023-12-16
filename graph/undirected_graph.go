@@ -80,9 +80,13 @@ func (g *Graph) RemoveEdge(firstNodeID, secondNodeID int) {
 
 func (g *Graph) PrintGraph() {
 	for _, node := range g.nodes {
-		fmt.Printf("Node %d: ", node.id)
-		for _, neighbor := range node.neighbors {
-			fmt.Printf("%d - ", neighbor.id)
+		fmt.Printf("Node of value == %v has nodes of values: ", node.Value)
+		length := len(node.neighbors)
+		for i, neighbor := range node.neighbors {
+			fmt.Printf("%v ", neighbor.Value)
+			if i < length-1 {
+				fmt.Print("- ")
+			}
 		}
 		fmt.Print("\n")
 	}
