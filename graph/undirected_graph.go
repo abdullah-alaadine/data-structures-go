@@ -18,3 +18,11 @@ func NewGraph() *Graph {
 func (g *Graph) AddNode(n *Node) {
 	g.nodes[n.ID] = n
 }
+
+func (g *Graph) AddEdge(firstNodeID, secondNodeID int) {
+	firstNode := g.nodes[firstNodeID]
+	secondNode := g.nodes[secondNodeID]
+
+	firstNode.Neighbors = append(firstNode.Neighbors, secondNode)
+	secondNode.Neighbors = append(secondNode.Neighbors, firstNode)
+}
