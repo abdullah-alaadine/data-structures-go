@@ -1,6 +1,7 @@
 package graph
 
 type Node struct {
+	Id        int
 	Neighbors []*Node
 }
 
