@@ -10,6 +10,8 @@ type node struct {
 	neighbors []*node
 }
 
+func (n *node) ID() int { return n.id }
+
 type Graph struct {
 	nodes map[int]*node
 }
