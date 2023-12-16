@@ -44,3 +44,19 @@ func (g *Graph) RemoveNode(nodeID int) *Node {
 	delete(g.nodes, nodeID)
 	return node
 }
+
+func (g *Graph) RemoveEdge(firstNodeID, secondNodeID int) {
+	firstNode := g.nodes[firstNodeID]
+	secondNode := g.nodes[secondNodeID]
+
+	for i := range firstNode.Neighbors {
+		if firstNode.Neighbors[i].ID == secondNodeID {
+			firstNode.Neighbors = append(firstNode.Neighbors[:i], firstNode.Neighbors[i+1:]...)
+		}
+	}
+	for i := range secondNode.Neighbors {
+		if secondNode.Neighbors[i].ID == firstNodeID {
+			secondNode.Neighbors = append(secondNode.Neighbors[:i], secondNode.Neighbors[i+1:]...)
+		}
+	}
+}
