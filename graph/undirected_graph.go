@@ -2,23 +2,33 @@ package graph
 
 import "fmt"
 
-type Node struct {
+var id int = 0
+
+type node struct {
 	ID        int
 	Value     any
-	Neighbors []*Node
+	Neighbors []*node
 }
 
 type Graph struct {
-	nodes map[int]*Node
+	nodes map[int]*node
 }
 
 func NewGraph() *Graph {
 	return &Graph{
-		nodes: make(map[int]*Node),
+		nodes: make(map[int]*node),
 	}
 }
 
-func (g *Graph) AddNode(n *Node) {
+func newNode(value any) *node {
+	id++
+	return &node{
+		ID:    id,
+		Value: value,
+	}
+}
+
+func (g *Graph) AddNode(n *node) {
 	g.nodes[n.ID] = n
 }
 
@@ -30,7 +40,7 @@ func (g *Graph) AddEdge(firstNodeID, secondNodeID int) {
 	secondNode.Neighbors = append(secondNode.Neighbors, firstNode)
 }
 
-func (g *Graph) RemoveNode(nodeID int) *Node {
+func (g *Graph) RemoveNode(nodeID int) *node {
 	node, ok := g.nodes[nodeID]
 	if !ok {
 		return nil
