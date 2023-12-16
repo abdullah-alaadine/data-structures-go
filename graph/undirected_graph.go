@@ -4,6 +4,7 @@ import "fmt"
 
 type Node struct {
 	ID        int
+	Value     any
 	Neighbors []*Node
 }
 
