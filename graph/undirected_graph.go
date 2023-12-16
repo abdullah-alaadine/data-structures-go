@@ -30,9 +30,10 @@ func newNode(value any) *node {
 	}
 }
 
-func (g *Graph) AddNode(value any) {
+func (g *Graph) AddNode(value any) *node {
 	n := newNode(value)
 	g.nodes[n.id] = n
+	return n
 }
 
 func (g *Graph) AddEdge(firstNodeID, secondNodeID int) {
