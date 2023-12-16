@@ -1,5 +1,7 @@
 package graph
 
+import "fmt"
+
 type Node struct {
 	ID        int
 	Neighbors []*Node
@@ -58,5 +60,15 @@ func (g *Graph) RemoveEdge(firstNodeID, secondNodeID int) {
 		if secondNode.Neighbors[i].ID == firstNodeID {
 			secondNode.Neighbors = append(secondNode.Neighbors[:i], secondNode.Neighbors[i+1:]...)
 		}
+	}
+}
+
+func (g *Graph) PrintGraph() {
+	for _, node := range g.nodes {
+		fmt.Printf("Node %d: ", node.ID)
+		for _, neighbor := range node.Neighbors {
+			fmt.Printf("%d - ", neighbor.ID)
+		}
+		fmt.Print("\n")
 	}
 }
