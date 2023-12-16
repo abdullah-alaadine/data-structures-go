@@ -5,9 +5,9 @@ import "fmt"
 var id int = 0
 
 type node struct {
-	ID        int
+	id        int
 	Value     any
-	Neighbors []*node
+	neighbors []*node
 }
 
 type Graph struct {
@@ -23,22 +23,22 @@ func NewGraph() *Graph {
 func newNode(value any) *node {
 	id++
 	return &node{
-		ID:    id,
+		id:    id,
 		Value: value,
 	}
 }
 
 func (g *Graph) AddNode(value any) {
 	n := newNode(value)
-	g.nodes[n.ID] = n
+	g.nodes[n.id] = n
 }
 
 func (g *Graph) AddEdge(firstNodeID, secondNodeID int) {
 	firstNode := g.nodes[firstNodeID]
 	secondNode := g.nodes[secondNodeID]
 
-	firstNode.Neighbors = append(firstNode.Neighbors, secondNode)
-	secondNode.Neighbors = append(secondNode.Neighbors, firstNode)
+	firstNode.neighbors = append(firstNode.neighbors, secondNode)
+	secondNode.neighbors = append(secondNode.neighbors, firstNode)
 }
 
 func (g *Graph) RemoveNode(nodeID int) *node {
@@ -47,10 +47,10 @@ func (g *Graph) RemoveNode(nodeID int) *node {
 		return nil
 	}
 
-	for _, node := range node.Neighbors {
-		for i := range g.nodes[node.ID].Neighbors {
-			if g.nodes[node.ID].Neighbors[i].ID == node.ID {
-				g.nodes[node.ID].Neighbors = append(g.nodes[node.ID].Neighbors[:i], g.nodes[node.ID].Neighbors[i+1:]...)
+	for _, node := range node.neighbors {
+		for i := range g.nodes[node.id].neighbors {
+			if g.nodes[node.id].neighbors[i].id == node.id {
+				g.nodes[node.id].neighbors = append(g.nodes[node.id].neighbors[:i], g.nodes[node.id].neighbors[i+1:]...)
 			}
 		}
 	}
@@ -63,23 +63,23 @@ func (g *Graph) RemoveEdge(firstNodeID, secondNodeID int) {
 	firstNode := g.nodes[firstNodeID]
 	secondNode := g.nodes[secondNodeID]
 
-	for i := range firstNode.Neighbors {
-		if firstNode.Neighbors[i].ID == secondNodeID {
-			firstNode.Neighbors = append(firstNode.Neighbors[:i], firstNode.Neighbors[i+1:]...)
+	for i := range firstNode.neighbors {
+		if firstNode.neighbors[i].id == secondNodeID {
+			firstNode.neighbors = append(firstNode.neighbors[:i], firstNode.neighbors[i+1:]...)
 		}
 	}
-	for i := range secondNode.Neighbors {
-		if secondNode.Neighbors[i].ID == firstNodeID {
-			secondNode.Neighbors = append(secondNode.Neighbors[:i], secondNode.Neighbors[i+1:]...)
+	for i := range secondNode.neighbors {
+		if secondNode.neighbors[i].id == firstNodeID {
+			secondNode.neighbors = append(secondNode.neighbors[:i], secondNode.neighbors[i+1:]...)
 		}
 	}
 }
 
 func (g *Graph) PrintGraph() {
 	for _, node := range g.nodes {
-		fmt.Printf("Node %d: ", node.ID)
-		for _, neighbor := range node.Neighbors {
-			fmt.Printf("%d - ", neighbor.ID)
+		fmt.Printf("Node %d: ", node.id)
+		for _, neighbor := range node.neighbors {
+			fmt.Printf("%d - ", neighbor.id)
 		}
 		fmt.Print("\n")
 	}
