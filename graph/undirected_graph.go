@@ -1,7 +1,7 @@
 package graph
 
 type Node struct {
-	Id        int
+	ID        int
 	Neighbors []*Node
 }
 
@@ -13,4 +13,8 @@ func NewGraph() *Graph {
 	return &Graph{
 		nodes: make(map[int]*Node),
 	}
+}
+
+func (g *Graph) AddNode(n *Node) {
+	g.nodes[n.ID] = n
 }
