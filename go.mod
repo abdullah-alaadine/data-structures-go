@@ -1,3 +1,3 @@
-module github.com/abdullah-alaadine/data-structures-go
+module github.com/knbr13/data-structures-go
 
 go 1.21.4
