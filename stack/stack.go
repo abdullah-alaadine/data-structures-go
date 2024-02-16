@@ -4,28 +4,36 @@ import (
 	linkedlist "github.com/knbr13/data-structures-go/linked_list"
 )
 
-type Stack struct {
-	list linkedlist.Linkedlist
+type Stack[T any] struct {
+	list linkedlist.LinkedList[T]
 }
 
-func NewStack() *Stack {
-	return &Stack{
-		list: *linkedlist.NewLinkedList(),
+func NewStack[T any]() *Stack[T] {
+	return &Stack[T]{
+		list: *linkedlist.New[T](),
 	}
 }
 
-func (s *Stack) Push(v int) {
+func (s *Stack[T]) Push(v T) {
 	s.list.Prepend(v)
 }
 
-func (s *Stack) Pop() *int {
-	return s.list.Shift()
+func (s *Stack[T]) Pop() (T, bool) {
+	return s.list.Pop()
 }
 
-func (s *Stack) Length() int {
-	return s.list.Length()
+func (s *Stack[T]) Length() int {
+	return s.list.Len()
 }
 
-func (s *Stack) PrintStack() {
-	s.list.PrintListReversely()
+func (s *Stack[T]) PrintStack() {
+	s.list.PrintList()
+}
+
+func (s *Stack[T]) IsEmpty() bool {
+	return s.list.IsEmpty()
+}
+
+func (s *Stack[T]) Clear() {
+	s.list.Clear()
 }
