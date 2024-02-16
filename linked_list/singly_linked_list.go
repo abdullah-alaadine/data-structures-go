@@ -2,165 +2,100 @@ package linkedlist
 
 import (
 	"fmt"
-	"os"
+
+	"github.com/knbr13/data-structures-go/node"
 )
 
-type node struct {
-	data int
-	next *node
-}
-
-type Linkedlist struct {
-	head   *node
+type LinkedList[T any] struct {
+	head   *node.Node[T]
 	length int
 }
 
-func NewLinkedList() *Linkedlist {
-	return &Linkedlist{}
+func New[T any]() *LinkedList[T] {
+	return &LinkedList[T]{
+		head: nil,
+	}
 }
 
-func (l *Linkedlist) Prepend(n int) {
-	newNode := &node{data: n, next: l.head}
-	l.head = newNode
+func (l *LinkedList[T]) Len() int { return l.length }
+
+func (l *LinkedList[T]) Prepend(v T) {
+	newNode := node.New[T](v)
+	l.prepend(newNode)
+}
+
+func (l *LinkedList[T]) prepend(n *node.Node[T]) {
+	n.Next = l.head
+	l.head = n
 	l.length++
 }
 
-func (l *Linkedlist) Insert(n, idx int) {
-	if idx > l.length || idx < 0 {
-		fmt.Fprintln(os.Stderr, "index out of range")
-		return
-	}
-
-	if l.head == nil {
-		l.head = &node{data: n}
-		l.length++
-		return
-	}
-
-	curr := l.head
-	for ; idx > 1; idx-- {
-		curr = curr.next
-	}
-	newNode := &node{data: n, next: curr.next}
-	curr.next = newNode
-	l.length++
+func (l *LinkedList[T]) Append(v T) {
+	newNode := node.New[T](v)
+	l.append(newNode)
 }
 
-func (l *Linkedlist) Append(n int) {
-	newNode := &node{data: n}
-	if l.head == nil {
-		l.head = newNode
+func (l *LinkedList[T]) append(n *node.Node[T]) {
+	if l.length == 0 {
+		l.head = n
 		l.length++
 		return
 	}
 	curr := l.head
-	for curr.next != nil {
-		curr = curr.next
+	for curr.Next != nil {
+		curr = curr.Next
 	}
-	curr.next = newNode
+	curr.Next = n
 	l.length++
 }
 
-func (l *Linkedlist) PutIn(n, idx int) {
-	if idx >= l.length || idx < 0 {
-		fmt.Fprintln(os.Stderr, "index out of range")
-		return
-	}
-
-	curr := l.head
-	for ; idx > 0; idx-- {
-		curr = curr.next
-	}
-	curr.data = n
+func (l *LinkedList[T]) Remove(index int) (T, bool) {
+	return l.remove(index)
 }
 
-func (l *Linkedlist) Delete(n int) {
-	if l.head == nil {
-		return
+func (l *LinkedList[T]) Pop() (T, bool) {
+	return l.remove(0)
+}
+
+func (l *LinkedList[T]) RemoveTail() (T, bool) {
+	return l.remove(l.length - 1)
+}
+
+func (l *LinkedList[T]) remove(index int) (T, bool) {
+	var t T
+	if index < 0 || index >= l.length {
+		return t, false
 	}
-	if l.head.data == n {
-		l.head = l.head.next
+	if index == 0 {
+		temp := l.head.Value
+		l.head = l.head.Next
 		l.length--
-		return
+		return temp, true
 	}
-
 	curr := l.head
-	for curr.next != nil {
-		if curr.next.data == n {
-			curr.next = curr.next.next
-			l.length--
-			return
-		}
-		curr = curr.next
+	for i := 0; i < index-1; i++ {
+		curr = curr.Next
 	}
-}
-
-func (l *Linkedlist) Shift() *int {
-	if l.head == nil {
-		return nil
-	}
-	v := l.head
-	l.head = l.head.next
+	temp := curr.Next.Value
+	curr.Next = curr.Next.Next
 	l.length--
-	return &v.data
+	return temp, true
 }
 
-func (l *Linkedlist) DeleteAt(idx int) {
-	if idx >= l.length || idx < 0 {
-		fmt.Fprintln(os.Stderr, "index out of range")
-		return
-	}
-
-	if idx == 0 {
-		l.head = l.head.next
-		l.length--
-		return
-	}
-
+func (l *LinkedList[T]) PrintList() {
 	curr := l.head
-	for ; idx > 1; idx-- {
-		curr = curr.next
-	}
-	curr.next = curr.next.next
-	l.length--
-}
-
-func (l *Linkedlist) PrintList() {
-	curr := l.head
-	fmt.Print("[ ")
 	for curr != nil {
-		fmt.Printf("%d ", curr.data)
-		curr = curr.next
+		fmt.Printf("%v ", curr.Value)
+		curr = curr.Next
 	}
-	fmt.Println("]")
+	fmt.Print("\n")
 }
 
-func (l *Linkedlist) PrintListReversely() {
-	if l.head == nil {
-		return
-	}
-
-	values := []int{}
-	curr := l.head
-
-	for curr != nil {
-		values = append(values, curr.data)
-		curr = curr.next
-	}
-	fmt.Print("[ ")
-	for i := len(values) - 1; i >= 0; i-- {
-		fmt.Printf("%d ", values[i])
-	}
-	fmt.Println("]")
+func (l *LinkedList[T]) IsEmpty() bool {
+	return l.length == 0
 }
 
-func (l *Linkedlist) Length() int {
-	return l.length
-}
-
-func (l *Linkedlist) GetHeadData() *int {
-	if l.head != nil {
-		return &l.head.data
-	}
-	return nil
+func (l *LinkedList[T]) Clear() {
+	l.head = nil
+	l.length = 0
 }
