@@ -8,7 +8,7 @@ type Stack[T any] struct {
 	list linkedlist.LinkedList[T]
 }
 
-func NewStack[T any]() *Stack[T] {
+func New[T any]() *Stack[T] {
 	return &Stack[T]{
 		list: *linkedlist.New[T](),
 	}
@@ -22,7 +22,7 @@ func (s *Stack[T]) Pop() (T, bool) {
 	return s.list.Pop()
 }
 
-func (s *Stack[T]) Length() int {
+func (s *Stack[T]) Len() int {
 	return s.list.Len()
 }
 
