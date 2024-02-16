@@ -2,12 +2,10 @@ package linkedlist
 
 import (
 	"fmt"
-
-	"github.com/knbr13/data-structures-go/node"
 )
 
 type LinkedList[T any] struct {
-	head   *node.Node[T]
+	head   *Node[T]
 	length int
 }
 
@@ -20,22 +18,22 @@ func New[T any]() *LinkedList[T] {
 func (l *LinkedList[T]) Len() int { return l.length }
 
 func (l *LinkedList[T]) Prepend(v T) {
-	newNode := node.New[T](v)
+	newNode := NewNode[T](v)
 	l.prepend(newNode)
 }
 
-func (l *LinkedList[T]) prepend(n *node.Node[T]) {
+func (l *LinkedList[T]) prepend(n *Node[T]) {
 	n.Next = l.head
 	l.head = n
 	l.length++
 }
 
 func (l *LinkedList[T]) Append(v T) {
-	newNode := node.New[T](v)
+	newNode := NewNode[T](v)
 	l.append(newNode)
 }
 
-func (l *LinkedList[T]) append(n *node.Node[T]) {
+func (l *LinkedList[T]) append(n *Node[T]) {
 	if l.length == 0 {
 		l.head = n
 		l.length++

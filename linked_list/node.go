@@ -1,11 +1,11 @@
-package node
+package linkedlist
 
 type Node[T any] struct {
 	Value T
 	Next  *Node[T]
 }
 
-func New[T any](v T) *Node[T] {
+func NewNode[T any](v T) *Node[T] {
 	return &Node[T]{
 		Value: v,
 		Next:  nil,
