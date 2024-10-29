@@ -23,3 +23,15 @@ func (l *DoublyLinkedList[T]) PushBack(v T) {
 	}
 	l.length++
 }
+
+func (l *DoublyLinkedList[T]) PushFront(v T) {
+	n := NewNode(v)
+	if l.length == 0 {
+		l.head, l.tail = n, n
+	} else {
+		n.Next = l.head
+		l.head.Prev = n
+		l.head = n
+	}
+	l.length++
+}
