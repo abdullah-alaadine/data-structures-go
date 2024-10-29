@@ -1,4 +1,4 @@
-package linkedlist
+package doublylinkedlist
 
 type DoublyLinkedList[T any] struct {
 	head   *DNode[T]

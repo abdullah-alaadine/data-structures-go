@@ -10,15 +10,3 @@ func NewNode[T any](v T) *Node[T] {
 		Value: v,
 	}
 }
-
-type DNode[T any] struct {
-	Value T
-	Prev  *DNode[T]
-	Next  *DNode[T]
-}
-
-func NewDNode[T any](v T) *DNode[T] {
-	return &DNode[T]{
-		Value: v,
-	}
-}
