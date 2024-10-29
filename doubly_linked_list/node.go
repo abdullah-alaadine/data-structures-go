@@ -1,13 +1,13 @@
 package doublylinkedlist
 
-type DNode[T any] struct {
+type Node[T any] struct {
 	Value T
-	Prev  *DNode[T]
-	Next  *DNode[T]
+	Prev  *Node[T]
+	Next  *Node[T]
 }
 
-func NewDNode[T any](v T) *DNode[T] {
-	return &DNode[T]{
+func NewNode[T any](v T) *Node[T] {
+	return &Node[T]{
 		Value: v,
 	}
 }
