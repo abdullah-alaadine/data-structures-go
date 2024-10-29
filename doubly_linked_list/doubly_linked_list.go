@@ -9,3 +9,5 @@ type DoublyLinkedList[T any] struct {
 func New[T any]() *DoublyLinkedList[T] {
 	return &DoublyLinkedList[T]{}
 }
+
+func (l *DoublyLinkedList[T]) Len() uint { return l.length }
