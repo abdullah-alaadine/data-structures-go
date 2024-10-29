@@ -51,3 +51,19 @@ func (l *DoublyLinkedList[T]) PopFront() (T, bool) {
 	l.length--
 	return v, true
 }
+
+func (l *DoublyLinkedList[T]) PopBack() (T, bool) {
+	if l.length == 0 {
+		var v T
+		return v, false
+	}
+	v := l.tail.Value
+	l.tail = l.tail.Prev
+	if l.tail != nil {
+		l.tail.Next = nil
+	} else {
+		l.head = nil
+	}
+	l.length--
+	return v, true
+}
